@@ -1,4 +1,15 @@
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: This is a test
+        options:
+        - test
+        - dev
+        - QA
+        - SIT
+        - Prod
 
 jobs:
   my-job:
@@ -13,3 +24,5 @@ jobs:
       # Use the output from the `hello` step
       - name: Get the Output
         run: echo "The time was ${{ steps.hello.outputs.greeting }}"
+      - name: test env
+        run: echo "You chose ${{ github.event.inputs.environment }}"
